@@ -1,7 +1,15 @@
 local DataStoreService = game:GetService("DataStoreService")
 local Players = game:GetService("Players")
 
-local PlayerDataStore = DataStoreService:GetDataStore("PlayerData_v1")
+-- GetDataStore throws in an unpublished place (or with API access off), so
+-- fall back to in-memory-only data instead of taking the whole server down.
+local dataStoreOk, PlayerDataStore = pcall(function()
+	return DataStoreService:GetDataStore("PlayerData_v1")
+end)
+
+if not dataStoreOk then
+	warn("PlayerDataManager: DataStore unavailable, running without persistence: " .. tostring(PlayerDataStore))
+end
 
 local DEFAULT_DATA = {
 	Coins = 0,
@@ -12,6 +20,10 @@ local PlayerDataManager = {}
 local sessionData: { [Player]: typeof(DEFAULT_DATA) } = {}
 
 local function loadData(player: Player): typeof(DEFAULT_DATA)
+	if not dataStoreOk then
+		return table.clone(DEFAULT_DATA)
+	end
+
 	local key = "Player_" .. player.UserId
 	local ok, result = pcall(function()
 		return PlayerDataStore:GetAsync(key)
@@ -29,6 +41,10 @@ local function loadData(player: Player): typeof(DEFAULT_DATA)
 end
 
 local function saveData(player: Player)
+	if not dataStoreOk then
+		return
+	end
+
 	local data = sessionData[player]
 	if not data then
 		return
