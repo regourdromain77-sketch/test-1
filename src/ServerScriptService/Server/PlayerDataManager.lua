@@ -1,5 +1,8 @@
 local DataStoreService = game:GetService("DataStoreService")
 local Players = game:GetService("Players")
+local ReplicatedStorage = game:GetService("ReplicatedStorage")
+
+local PetData = require(ReplicatedStorage.Modules.PetData)
 
 -- GetDataStore throws in an unpublished place (or with API access off), so
 -- fall back to in-memory-only data instead of taking the whole server down.
@@ -98,6 +101,34 @@ function PlayerDataManager.AddCoins(player: Player, amount: number)
 	if coinsValue then
 		coinsValue.Value = data.Coins
 	end
+end
+
+function PlayerDataManager.GetInventorySummary(player: Player)
+	local data = sessionData[player]
+	if not data then
+		return {}
+	end
+
+	local counts: { [string]: number } = {}
+	for _, speciesId in data.Pets do
+		counts[speciesId] = (counts[speciesId] or 0) + 1
+	end
+
+	local summary = {}
+	for speciesId, count in counts do
+		local species = PetData.Species[speciesId]
+		if species then
+			table.insert(summary, {
+				id = species.id,
+				displayName = species.displayName,
+				rarity = species.rarity,
+				baseValue = species.baseValue,
+				count = count,
+			})
+		end
+	end
+
+	return summary
 end
 
 function PlayerDataManager.Init()

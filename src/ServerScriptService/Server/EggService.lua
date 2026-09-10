@@ -50,7 +50,6 @@ function EggService.Hatch(player: Player)
 
 	local species = PetData.rollRandomSpecies()
 	PlayerDataManager.AddPet(player, species.id)
-	PlayerDataManager.AddCoins(player, species.baseValue)
 
 	PetHatched:FireClient(player, species)
 end

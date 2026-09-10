@@ -11,6 +11,9 @@
         "$className": "Folder",
         "PetHatched": {
           "$className": "RemoteEvent"
+        },
+        "GetInventory": {
+          "$className": "RemoteFunction"
         }
       }
     },

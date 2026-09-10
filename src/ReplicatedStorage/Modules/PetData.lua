@@ -12,6 +12,7 @@ export type PetSpecies = {
 local PetData = {}
 
 PetData.Species = {
+	-- Common
 	Bronto = {
 		id = "Bronto",
 		displayName = "Bronto",
@@ -19,6 +20,14 @@ PetData.Species = {
 		weight = 100,
 		baseValue = 1,
 	},
+	Tricera = {
+		id = "Tricera",
+		displayName = "Tricératops",
+		rarity = "Common",
+		weight = 90,
+		baseValue = 1,
+	},
+	-- Rare
 	RainbowBronto = {
 		id = "RainbowBronto",
 		displayName = "Bronto arc-en-ciel",
@@ -26,6 +35,14 @@ PetData.Species = {
 		weight = 35,
 		baseValue = 5,
 	},
+	Ptero = {
+		id = "Ptero",
+		displayName = "Ptérodactyle",
+		rarity = "Rare",
+		weight = 30,
+		baseValue = 6,
+	},
+	-- Epic
 	Sphinx = {
 		id = "Sphinx",
 		displayName = "Sphinx royal",
@@ -33,12 +50,34 @@ PetData.Species = {
 		weight = 10,
 		baseValue = 20,
 	},
+	IceDragon = {
+		id = "IceDragon",
+		displayName = "Dragon de glace",
+		rarity = "Epic",
+		weight = 8,
+		baseValue = 25,
+	},
+	Scorpion = {
+		id = "Scorpion",
+		displayName = "Scorpion antique",
+		rarity = "Epic",
+		weight = 8,
+		baseValue = 25,
+	},
+	-- Legendary
 	SilverAntelope = {
 		id = "SilverAntelope",
 		displayName = "Antilope argentée",
 		rarity = "Legendary",
 		weight = 2,
 		baseValue = 60,
+	},
+	CosmicWhale = {
+		id = "CosmicWhale",
+		displayName = "Baleine cosmique",
+		rarity = "Legendary",
+		weight = 1,
+		baseValue = 100,
 	},
 } :: { [string]: PetSpecies }
 
