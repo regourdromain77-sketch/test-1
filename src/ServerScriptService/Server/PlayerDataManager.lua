@@ -131,6 +131,8 @@ function PlayerDataManager.GetInventorySummary(player: Player)
 	return summary
 end
 
+local AUTOSAVE_INTERVAL_SECONDS = 120
+
 function PlayerDataManager.Init()
 	Players.PlayerAdded:Connect(function(player)
 		local data = loadData(player)
@@ -146,6 +148,15 @@ function PlayerDataManager.Init()
 	game:BindToClose(function()
 		for _, player in Players:GetPlayers() do
 			saveData(player)
+		end
+	end)
+
+	task.spawn(function()
+		while true do
+			task.wait(AUTOSAVE_INTERVAL_SECONDS)
+			for _, player in Players:GetPlayers() do
+				saveData(player)
+			end
 		end
 	end)
 end
