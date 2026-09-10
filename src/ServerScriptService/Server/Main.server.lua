@@ -8,7 +8,7 @@ PlayerDataManager.Init()
 EggService.Init()
 IncomeService.Init()
 
-ReplicatedStorage.Remotes.GetInventory.OnServerInvoke = function(player)
+ReplicatedStorage.Remotes:WaitForChild("GetInventory").OnServerInvoke = function(player)
 	return {
 		pets = PlayerDataManager.GetInventorySummary(player),
 		incomePerSecond = IncomeService.GetIncomePerSecond(player),
