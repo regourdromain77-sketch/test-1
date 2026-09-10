@@ -1,0 +1,11 @@
+# Roblox place files (built locally from source, or live in Team Create)
+*.rbxl
+*.rbxlx
+
+# Rojo
+sourcemap.json
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.vscode/
