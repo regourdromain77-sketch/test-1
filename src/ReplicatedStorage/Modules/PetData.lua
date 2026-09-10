@@ -11,7 +11,7 @@ export type PetSpecies = {
 
 local PetData = {}
 
-PetData.Species: { [string]: PetSpecies } = {
+PetData.Species = {
 	Bronto = {
 		id = "Bronto",
 		displayName = "Bronto",
@@ -40,7 +40,7 @@ PetData.Species: { [string]: PetSpecies } = {
 		weight = 2,
 		baseValue = 60,
 	},
-}
+} :: { [string]: PetSpecies }
 
 function PetData.rollRandomSpecies(): PetSpecies
 	local totalWeight = 0
